@@ -7,14 +7,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 
 @WebServlet(urlPatterns = {"/xin-chao2", "/hello2"})
 public class HelloServlet2 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        PrintWriter printWriter = resp.getWriter();
-        printWriter.println("Xin chao moi nguoi!");
-        printWriter.close();
+        req.getContextPath();
+        req.getContentType();
+        Enumeration<String> keys = req.getHeaderNames();
+        while (keys.hasMoreElements()) {
+            String key = keys.nextElement();
+            System.out.println(key + ":" + req.getHeader(key));
+        }
     }
 }
