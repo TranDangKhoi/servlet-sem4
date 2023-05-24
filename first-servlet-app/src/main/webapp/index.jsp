@@ -5,9 +5,9 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-<form method="POST" action="UploadServlet" enctype="multipart/form-data">
-    <input type="file" name="imageFile">
-    <input type="submit" value="Upload">
-</form>
+<%--<form method="POST" action="UploadServlet" enctype="multipart/form-data">--%>
+<%--    <input type="file" name="imageFile">--%>
+<%--    <input type="submit" value="Upload">--%>
+<%--</form>--%>
 </body>
 </html>
