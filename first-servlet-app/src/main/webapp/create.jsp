@@ -9,12 +9,17 @@
 <html>
 <head>
     <title>Create Student</title>
+    <style>
+        <%@include file="styles/style.css" %>
+    </style>
 </head>
 <body>
-<form action="student" method="post">
-    <input type="text" name="id">
-    <input type="text" name="name">
-    <button type="submit">Submit</button>
+<form action="student" method="post" class="form">
+    <label for="id">Id:</label>
+    <input type="text" name="id" id="id" class="input">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" class="input">
+    <button type="submit" class="submit-btn">Submit</button>
 </form>
 </body>
 </html>

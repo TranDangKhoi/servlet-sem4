@@ -3,6 +3,7 @@ package com.example.firstservletapp.controllers;
 import com.example.firstservletapp.entity.Student;
 import com.example.firstservletapp.dao.StudentDao;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,22 +18,14 @@ public class StudentController extends HttpServlet {
     StudentDao studentDao = new StudentDao();
 
     @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html");
         List<Student> studentList = studentDao.studentList();
-        PrintWriter printWriter = resp.getWriter();
-        if (studentList != null) {
-            for (Student student : studentList
-            ) {
-                printWriter.println("Id:" + student.getId() + "<br>");
-                printWriter.println("Name:" + student.getName() + "<br>");
-            }
-        } else {
-            printWriter.println("Không có dữ liệu");
-        }
-
+        req.setAttribute("studentList", studentList);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("student.jsp");
+        requestDispatcher.forward(req, resp);
     }
 
     @Override
