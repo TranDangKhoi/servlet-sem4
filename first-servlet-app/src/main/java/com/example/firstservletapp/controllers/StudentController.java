@@ -18,16 +18,21 @@ public class StudentController extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        List<Student> studentList = studentDao.studentList();
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html");
+        List<Student> studentList = studentDao.studentList();
         PrintWriter printWriter = resp.getWriter();
-        for (Student student : studentList
-        ) {
-            printWriter.println("Id:" + student.getId() + "<br>");
-            printWriter.println("Name:" + student.getName() + "<br>");
+        if (studentList != null) {
+            for (Student student : studentList
+            ) {
+                printWriter.println("Id:" + student.getId() + "<br>");
+                printWriter.println("Name:" + student.getName() + "<br>");
+            }
+        } else {
+            printWriter.println("Không có dữ liệu");
         }
+
     }
 
     @Override

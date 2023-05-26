@@ -15,8 +15,9 @@ public class StudentDao {
 
     public List<Student> studentList() {
         try {
+            session = HibernateUtils.getSessionFactory().openSession();
             session.beginTransaction();
-            List<Student> list = session.createNativeQuery("SELECT * FROM Student").getResultList();
+            List<Student> list = session.createQuery("FROM Student").getResultList();
             return list;
         } catch (Exception ex) {
             session.getTransaction().rollback();
@@ -29,8 +30,13 @@ public class StudentDao {
     public Student createOrUpdate(Student student) {
         try {
             session.beginTransaction();
-            session.save(student);
+            if (student.getId() == null) {
+                session.save(student);
+            } else {
+                session.update(student);
+            }
             session.getTransaction().commit();
+
             return student;
         } catch (Exception ex) {
             session.getTransaction().rollback();
