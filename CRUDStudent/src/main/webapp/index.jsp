@@ -12,5 +12,6 @@
 <a href="logout">logout</a>
 <a href="student">Student get all</a>
 <a href="student.jsp">Add new student</a>
+<a href="student.jsp">remove</a>
 </body>
 </html>

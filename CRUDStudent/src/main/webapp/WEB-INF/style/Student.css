@@ -1,0 +1,8 @@
+.form-input {
+    width: 15rem;
+    height: 3rem;
+}
+
+input:focus {
+    border: aqua;
+}

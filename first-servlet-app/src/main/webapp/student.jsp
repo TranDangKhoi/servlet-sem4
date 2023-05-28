@@ -31,7 +31,6 @@
         <td><%= student.getName() %>
         </td>
         <td>Delete | Edit</td>
-        
     </tr>
     <% }
     } %>
