@@ -7,14 +7,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
     <title>Title</title>
-    <link type="text/css" href="WEB-INF/style/Student.css">
+    <style><%@include file="WEB-INF/style/style.css" %></style>
+    <style><%@include file="WEB-INF/style/student.css" %></style>
 </head>
 <body>
-<table border="1px solid #888" width="100%" align="center">
+<table >
+    <h1 class="text-title">All Student</h1>
     <thead>
     <tr>
         <th>ID</th>
@@ -24,51 +27,55 @@
     </tr>
     </thead>
     <tbody>
-    <% request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        List<Student> list = (List<Student>) request.getAttribute("listStudent");
-        for (int i = 0; i < list.size(); i++) {
-    %>
-    <tr>
-        <td><%= list.get(i).getId()%>
-        </td>
-        <td><%= list.get(i).getName()%>
-        </td>
-        <td><%= list.get(i).getAge()%>
-        </td>
-        <td><%= list.get(i).getAddress()%>
-        </td>
-        <td>
-            <form action="updateStudent.jsp" method="post" accept-charset="UTF-8">
-                <input type="hidden" name="studentId" value="<%= list.get(i).getId()%>"/>
-                <input type="hidden" name="studentName" value="<%= list.get(i).getName()%>"/>
-                <input type="hidden" name="studentAge" value="<%= list.get(i).getAge()%>"/>
-                <input type="hidden" name="studentAddress" value="<%= list.get(i).getAddress()%>"/>
-                <button type="submit">UPDATE</button>
-            </form>
-        </td>
-        <td>
-            <form action="student" method="post">
-                <input type="hidden" name="idStu" value=<%=list.get(i).getId()%>>
-                <input type="submit" name="method" value="DELETE">
-            </form>
-        </td>
+    <c:choose>
+        <c:when test="${listStudent.size() > 0}">
+            <c:forEach items="${listStudent}" var="student" varStatus="loop">
+                <tr>
+                    <th>${loop.index +1}</th>
+                    <td>${student.name}</td>
+                    <td>${student.age}</td>
+                    <td>${student.address}</td>
+                    <td>
+                        <form class="form" action="updateStudent.jsp" method="post" accept-charset="UTF-8">
+                            <input type="hidden" name="studentId" value="${student.id}"/>
+                            <input type="hidden" name="studentName" value="${student.name}"/>
+                            <input type="hidden" name="studentAge" value="${student.age}"/>
+                            <input type="hidden" name="studentAddress" value="${student.address}"/>
+                            <button type="submit">UPDATE</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="student" method="post">
+                            <input type="hidden" name="idStu" value="${student.id}">
+                            <button type="submit" name="method" value="DELETE">DELETE</button>
+                        </form>
+                    </td>
 
-    </tr>
-    <% }%>
-    <td></td>
+                </tr>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+            <h1>Don't Having Student</h1>
+        </c:otherwise>
+    </c:choose>
     </tbody>
 </table>
-<h1>Add Student</h1>
+<h1 class="text-title">Add Student</h1>
 <form action="student" method="post">
-    <label for="name">Name:</label>
-    <input class="form-input" type="text" id="name" name="name">
-    <label for="age">Age:</label>
-    <input class="form-input" type="text" id="age" name="age">
-    <label for="address">Address:</label>
-    <input class="form-input" type="text" id="address" name="address">
+    <div class="form-input">
+        <label class="label-text" for="name">Name:</label>
+        <input class="form input" type="text" id="name" name="name">
+    </div>
+    <div class="form-input">
+        <label class="label-text" for="age">Age:</label>
+        <input class="form input" type="text" id="age" name="age">
+    </div>
+    <div class="form-input">
+        <label class="label-text" for="address">Address:</label>
+        <input class="form input" type="text" id="address" name="address">
+    </div>
 
-    <input type="submit" name="method" value="Submit">
+    <input class=" submit-btn" type="submit" name="method" value="Submit">
 </form>
 </body>
 </html>

@@ -1,6 +1,6 @@
 package com.example.loginsvl.controller;
 
-import com.example.loginsvl.dao.StudenDaoImpl;
+import com.example.loginsvl.dao.Impl.StudenDaoImpl;
 import com.example.loginsvl.dao.StudentDao;
 import com.example.loginsvl.entity.Student;
 
@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(name = "student", value = "/student")
